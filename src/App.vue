@@ -1,19 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <TitleTicket />
+    <ButtonHeader />
+    <EmailContainer :list="allEmailsList" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TitleTicket from './components/TitleTicket.vue';
+import ButtonHeader from './components/ButtonHeader.vue';
+import EmailContainer from './components/EmailContainer.vue';
+
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
+  data: () => ({}),
   components: {
-    HelloWorld
-  }
-}
+    TitleTicket,
+    ButtonHeader,
+    EmailContainer,
+  },
+  computed: {
+    ...mapGetters('emails', ['allEmailsList']),
+  },
+  mounted() {
+    this.webSocket();
+  
+      },
+
+      methods: {
+        ...mapActions('emails', ['webSocket']),
+      },
+};
 </script>
 
 <style>
