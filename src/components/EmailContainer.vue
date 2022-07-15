@@ -20,9 +20,9 @@
   components:{
     EmailLine
   },
-  data:()=>{
+  data:()=>({
 
-  },
+  }),
   props:{
     list:{
       type:Object,

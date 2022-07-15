@@ -1,12 +1,5 @@
 import axios from '@/plagins/axios'
 
-// function serializeResponce(emails) {
-//   return emails.reduce((acc, item) => {
-//     acc[item._id] = item;
-//     return acc;
-//   }, {})
-// }
-
 const emails = {
   namespaced: true,
   state: {
@@ -34,9 +27,8 @@ const emails = {
     }
 
   },
-  //dispatch(){}
-  actions: {
 
+  actions: {
     initEmailStore: {
       handler({
         dispatch
@@ -52,12 +44,12 @@ const emails = {
       commit('EMAILLIST', res.data)
     },
 
-    // webSocket({ commit }) {
+    // webSocket({ commit }) {}
     //   const ws = new WebSocket('ws://localhost:3000')
 
     //   function setStatus(value) {
     //     console.log('Status web socket..', value);
-    //   }
+
 
       // function printMessage(value) {
       //   let email = JSON.parse(value)

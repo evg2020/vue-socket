@@ -10,8 +10,8 @@
 import TitleTicket from './components/TitleTicket.vue';
 import ButtonHeader from './components/ButtonHeader.vue';
 import EmailContainer from './components/EmailContainer.vue';
-
 import { mapActions, mapGetters } from 'vuex';
+
 
 export default {
   name: 'App',
@@ -24,14 +24,15 @@ export default {
   computed: {
     ...mapGetters('emails', ['allEmailsList']),
   },
+
   mounted() {
     this.webSocket();
-  
-      },
+  },
 
-      methods: {
-        ...mapActions('emails', ['webSocket']),
-      },
+  methods: {
+    ...mapActions('emails', ['webSocket']),
+
+  }
 };
 </script>
 

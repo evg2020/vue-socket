@@ -23,6 +23,7 @@
 export default {
   name: 'EmailLine',
   data: () => {},
+  
   props: {
     email: {
       type: Object,
