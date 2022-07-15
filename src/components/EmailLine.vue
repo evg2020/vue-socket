@@ -22,11 +22,11 @@
  <script>
 export default {
   name: 'EmailLine',
-  data: () => {},
-  
+  data: () => ({}),
+
   props: {
     email: {
-      type: Object,
+      type: [],
       required: true,
     },
   },

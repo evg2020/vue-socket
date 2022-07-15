@@ -3,6 +3,7 @@
     <TitleTicket />
     <ButtonHeader />
     <EmailContainer :list="allEmailsList" />
+    <b-button variant="outline-secondary" class="btn-circle lg" size="lg"  title = "anather" @click ="clickButton('Form')">send</b-button>
   </div>
 </template>
 
@@ -10,8 +11,8 @@
 import TitleTicket from './components/TitleTicket.vue';
 import ButtonHeader from './components/ButtonHeader.vue';
 import EmailContainer from './components/EmailContainer.vue';
-import { mapActions, mapGetters } from 'vuex';
 
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
@@ -32,7 +33,20 @@ export default {
   methods: {
     ...mapActions('emails', ['webSocket']),
 
-  }
+ clickButton: function (date) {
+            // $socket is socket.io-client instance
+            this.$socket.emit('emit_method', {data:date})
+        }
+  },
+
+  sockets: {
+    connect: function () {
+      console.log('Vue connected');
+    },
+    'vueConnection': function (date) {
+      console.log('server socket.emit("vueConnection"),', date);
+    },
+  },
 };
 </script>
 

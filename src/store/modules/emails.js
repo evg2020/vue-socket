@@ -30,9 +30,7 @@ const emails = {
 
   actions: {
     initEmailStore: {
-      handler({
-        dispatch
-      }) {
+      handler({ dispatch   }) {
         dispatch('fetchEmails')
       },
       root: true
@@ -40,7 +38,7 @@ const emails = {
 
     async fetchEmails({ commit }) {
       const res = await axios.get('/')
-      console.log('response--->', res.data);
+      // console.log('response--->', res.data);
       commit('EMAILLIST', res.data)
     },
 
