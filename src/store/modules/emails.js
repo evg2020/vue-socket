@@ -1,4 +1,5 @@
 import axios from '@/plagins/axios'
+// import Vue from 'vue'
 
 const emails = {
   namespaced: true,
@@ -9,10 +10,10 @@ const emails = {
   },
   //geters:{}
   getters: {
-    allEmailsList: ({
-      emailsList
-    }) => emailsList
-
+    allEmailsList: ({      emailsList    }) => {
+      console.log(emailsList);
+      return emailsList
+    }
   },
   //commit(){}
   mutations: {
@@ -22,7 +23,7 @@ const emails = {
     LASTADD(state, email) {
       state.lastEmail = email
     },
-    EMAILADD(state, email) {
+    ADD_EMAIL(state, email) {
       state.emailsList.push(email)
     }
 
@@ -30,37 +31,46 @@ const emails = {
 
   actions: {
     initEmailStore: {
-      handler({ dispatch   }) {
+      handler({
+        dispatch
+      }) {
         dispatch('fetchEmails')
       },
       root: true
     },
-
-    async fetchEmails({ commit }) {
+    async fetchEmails({
+      commit
+    }) {
       const res = await axios.get('/')
       // console.log('response--->', res.data);
       commit('EMAILLIST', res.data)
     },
+    addLastEmailInStore({      commit    }, data) {
+      commit('ADD_EMAIL', data)
+    }
 
-    // webSocket({ commit }) {}
+
+
+    // webSocket({ commit }) {
     //   const ws = new WebSocket('ws://localhost:3000')
 
     //   function setStatus(value) {
     //     console.log('Status web socket..', value);
 
 
-      // function printMessage(value) {
-      //   let email = JSON.parse(value)
-      //   console.log(JSON.parse(value));
-      //   commit('LASTADD', email)
-      //   commit('EMAILADD', email)
-      // }
-
-      // //подпишемся
-      // ws.onopen = () => setStatus('ONLINE')
-      // ws.onclose = () => setStatus('DISCONNECTED')
-      // ws.onmessage = response => printMessage(response.data)
+    // function printMessage(value) {
+    //   let email = JSON.parse(value)
+    //   console.log(JSON.parse(value));
+    //   commit('LASTADD', email)
+    //   commit('EMAILADD', email)
     // }
+
+    // //подпишемся
+    // ws.onopen = () => setStatus('ONLINE')
+    // ws.onclose = () => setStatus('DISCONNECTED')
+    // ws.onmessage = response => printMessage(response.data)
+    // }}
+
   }
 };
 

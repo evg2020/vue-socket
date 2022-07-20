@@ -3,7 +3,14 @@
     <TitleTicket />
     <ButtonHeader />
     <EmailContainer :list="allEmailsList" />
-    <b-button variant="outline-secondary" class="btn-circle lg" size="lg"  title = "anather" @click ="clickButton('Form')">send</b-button>
+    <b-button
+      variant="outline-secondary"
+      class="btn-circle lg"
+      size="lg"
+      title="anather"
+      @click="clickButton('EmailForm')"
+      >send</b-button
+    >
   </div>
 </template>
 
@@ -16,7 +23,9 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'App',
-  data: () => ({}),
+  data: () => ({
+    email: null,
+  }),
   components: {
     TitleTicket,
     ButtonHeader,
@@ -24,6 +33,7 @@ export default {
   },
   computed: {
     ...mapGetters('emails', ['allEmailsList']),
+   
   },
 
   mounted() {
@@ -31,20 +41,23 @@ export default {
   },
 
   methods: {
-    ...mapActions('emails', ['webSocket']),
+    ...mapActions('emails', ['webSocket', 'addLastEmailInStore']),
 
- clickButton: function (date) {
-            // $socket is socket.io-client instance
-            this.$socket.emit('emit_method', {data:date})
-        }
+    clickButton: function (date) {
+      // $socket is socket.io-client instance
+      this.$socket.emit('emit_method', { data: date });
+    },
   },
 
   sockets: {
     connect: function () {
       console.log('Vue connected');
     },
-    'vueConnection': function (date) {
-      console.log('server socket.emit("vueConnection"),', date);
+    vueConnection: function (data) {
+      console.log('server socket.emit("vueConnection"),', data);
+      this.email = data;
+      this.addLastEmailInStore(data);
+      this.allEmailsList;
     },
   },
 };

@@ -25,8 +25,8 @@
   }),
   props:{
     list:{
-      type:Object,
-      default:()=>({})
+      type:Array,
+      
     }
   }
 
